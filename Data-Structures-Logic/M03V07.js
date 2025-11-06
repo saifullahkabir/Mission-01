@@ -26,13 +26,69 @@ class LinkedList {
             this.tail = newNode;
         }
         this.length++;
+
+        return this;
     }
 
-    prepend() { }
+    prepend(value) {
+        const newNode = new Node(value);
 
-    insert() { }
+        // if the linked list is empty
+        if (this.head === null) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            // if the linked list is not empty
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+
+        return this;
+    }
+
+    insert(index, value) {
+        if (index < 0 || index > this.length) {
+            console.error('Index out of bound: shala muri khaa')
+            return undefined;
+        }
+
+        // if the insert is in the start of the linked list
+        if (index === 0) {
+            return this.prepend(value);
+        }
+
+        // if the insert is in the end of the linked list
+        if (index === this.length) {
+            return this.append(value);
+        }
+
+        // if the insert is in the middle of the linked list
+        const leadingNode = this._traverseToIndex(index - 1);
+        const holdingNode = leadingNode.next;
+
+        const newNode = new Node(value);
+
+        leadingNode.next = newNode;
+        newNode.next = holdingNode;
+
+        this.length++;
+    }
 
     remove() { }
+
+    // private helper method
+    // find the leading node
+    _traverseToIndex(index) {
+        let count = 0;
+        let currentNode = this.head;
+
+        while (count !== index) {
+            currentNode = currentNode.next;
+            count++;
+        }
+        return currentNode;
+    }
 
     print() {
         let currentNode = this.head;
@@ -46,9 +102,13 @@ class LinkedList {
 
 const linkedList = new LinkedList();
 
-linkedList.append(1);
-linkedList.append(2);
-linkedList.append(3);
+linkedList.append(1).append(2).append(3);
+
+linkedList.prepend(10).prepend(20).prepend(30);
+
+linkedList.insert(2, 100);
 
 linkedList.print();
 console.log(linkedList);
+
+
