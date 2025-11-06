@@ -1,3 +1,4 @@
+// Linked list
 
 class Node {
     constructor(value) {
@@ -13,6 +14,7 @@ class LinkedList {
         this.length = 0;
     }
 
+    //* O(1)
     append(value) {
         const newNode = new Node(value);
 
@@ -30,6 +32,7 @@ class LinkedList {
         return this;
     }
 
+    //* O(1)
     prepend(value) {
         const newNode = new Node(value);
 
@@ -47,6 +50,8 @@ class LinkedList {
         return this;
     }
 
+    //* Best Case = 0(1)
+    //* Worst case = O(n)
     insert(index, value) {
         if (index < 0 || index > this.length) {
             console.error('Index out of bound: shala muri khaa')
@@ -75,6 +80,8 @@ class LinkedList {
         this.length++;
     }
 
+    //* Best Case = 0(1)
+    //* Worst case = O(n)
     remove(index) {
         if (index === 0) {
             const removedNode = this.head.value;
@@ -105,6 +112,7 @@ class LinkedList {
         let count = 0;
         let currentNode = this.head;
 
+        //* O(n)
         while (count !== index) {
             currentNode = currentNode.next;
             count++;
@@ -126,12 +134,12 @@ const linkedList = new LinkedList();
 
 linkedList.append("A").append("B");
 
-// linkedList.prepend(10).prepend(20).prepend(30);
+linkedList.prepend(10).prepend(20).prepend(30);
 
 // linkedList.insert(2, 100);
 
-linkedList.remove(0);
-linkedList.remove(0);
+// linkedList.remove(0);
+// linkedList.remove(0);
 
 
 linkedList.print();
