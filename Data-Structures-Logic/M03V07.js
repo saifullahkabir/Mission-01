@@ -75,7 +75,29 @@ class LinkedList {
         this.length++;
     }
 
-    remove() { }
+    remove(index) {
+        if (index === 0) {
+            const removedNode = this.head.value;
+            this.head = this.head.next;
+
+            if (this.length === 1) {
+                this.tail = null;
+            }
+
+            this.length--;
+            return removedNode;
+        }
+
+        const leadingNode = this._traverseToIndex(index - 1);
+        const nodeToRemove = leadingNode.next;
+
+        leadingNode.next = nodeToRemove.next;
+
+        if (leadingNode.next === null) {
+            this.tail = leadingNode;
+        }
+        return nodeToRemove.value;
+    }
 
     // private helper method
     // find the leading node
@@ -102,11 +124,15 @@ class LinkedList {
 
 const linkedList = new LinkedList();
 
-linkedList.append(1).append(2).append(3);
+linkedList.append("A").append("B");
 
-linkedList.prepend(10).prepend(20).prepend(30);
+// linkedList.prepend(10).prepend(20).prepend(30);
 
-linkedList.insert(2, 100);
+// linkedList.insert(2, 100);
+
+linkedList.remove(0);
+linkedList.remove(0);
+
 
 linkedList.print();
 console.log(linkedList);
