@@ -1,3 +1,4 @@
+
 const binarySearch = (arr, target) => {
   console.log(`\n===================================`);
   console.log(`🚀 Searching for ${target} in: [${arr}]`);
